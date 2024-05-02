@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "ec204d9e-243e-4fbe-b6e6-f16f612094e0",
+		"name": "basic requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10203291"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/goals/getGoals",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "af973f61e9ade61a13287b32eaed5c52",
+						"uuid": "0d1ccf21-17ad-4eea-b4f3-724c73fad36e"
+					}
+				],
+				"url": "localhost:3000/goals/getGoals"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/goals/addGoals",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "af973f61e9ade61a13287b32eaed5c52",
+						"uuid": "b6ab619d-5c0a-489c-98fe-2bfe995399f6"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \" Title de ejemplo\",\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\",\r\n    \"due_date\": \"2024-05-06\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/goals/addGoals"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/goals/removeGoals",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "af973f61e9ade61a13287b32eaed5c52",
+						"uuid": "4d5d9c1d-78b3-4705-a255-24de768f3efa"
+					}
+				],
+				"url": "localhost:3000/goals/removeGoals/goal_1"
+			},
+			"response": []
+		}
+	]
+}
