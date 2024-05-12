@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:3000/goals/getGoals",
+			"name": "localhost:3001/goals/getGoals",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -17,12 +17,12 @@
 						"uuid": "0d1ccf21-17ad-4eea-b4f3-724c73fad36e"
 					}
 				],
-				"url": "localhost:3000/goals/getGoals"
+				"url": "localhost:3001/goals/getGoals"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/goals/addGoals",
+			"name": "localhost:3001/goals/addGoals",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -41,12 +41,12 @@
 						}
 					}
 				},
-				"url": "localhost:3000/goals/addGoals"
+				"url": "localhost:3001/goals/addGoals"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/goals/removeGoals",
+			"name": "localhost:3001/goals/removeGoals",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -56,7 +56,7 @@
 						"uuid": "4d5d9c1d-78b3-4705-a255-24de768f3efa"
 					}
 				],
-				"url": "localhost:3000/goals/removeGoals/goal_1"
+				"url": "localhost:3001/goals/removeGoals/goal_1"
 			},
 			"response": []
 		}
