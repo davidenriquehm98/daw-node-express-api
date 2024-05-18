@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
+const mongoose = require('mongoose')
 
 const getNextId = (prepend, list) => {
   let nextId = prepend + '1'
@@ -15,39 +16,58 @@ const getNextId = (prepend, list) => {
 }
 
 const tasks = []
+const tableInit = require('./../models/tableModel')
 
 /* GET home page. */
-router.get('/getTasks', function(req, res, next) {
-  res.status(200).json(tasks)
-});
+router.get('/getTasks', async (req, res, next) => {
+  try {
+    const response = await tableInit.find({ type: 'task' })
+    res.status(200).json(response)
+  } catch (err) {
+    res.status(500).json({ status: 'ERROR', message: 'No se obtubieron resultados; ' + err.message })
+  }
+})
 
-router.post('/addTasks', function(req, res, next) {
+router.post('/addTasks', async (req, res, next) => {
   let nextId = getNextId('task_', tasks)
   if (req.body != null && req.body.name && req.body.description && req.body.due_date) {
-    tasks.push({
-      id: nextId,
-      type: 'task',
-      ...req.body
-    })
-    res.status(200).json(tasks)
+    // tasks.push({
+    //   id: nextId,
+    //   type: 'task',
+    //   ...req.body
+    // })
+    const task = new tableInit(req.body)
+    try {
+      await task.save()
+      res.status(200).json(tasks)
+    } catch (err) {
+      res.status(500).json({ status: 'ERROR', message: 'No se guardó el registro; ' + err.message })
+    }
   } else {
     res.status(400).json({ status: 'ERROR', message: 'No se estan enviando los datos completos' })
   }
-});
+})
 
-router.delete('/removeTasks/:id', function(req, res, next) {
+router.delete('/removeTasks/:id', async (req, res, next) => {
   if (req.params != null && req.params.id) {
-    const item = tasks.find((task) => task.id === req.params.id)
-    const indexItem = tasks.indexOf(item)
-    if (indexItem >= 0) {
-      tasks.splice(indexItem, 1)
-      res.status(200).json(tasks)
-    } else {
-      res.status(404).json({ status: 'ERROR', message: 'No se encontró la tarea a eliminar' })
+    // const item = tasks.find((task) => task.id === req.params.id)
+    // const indexItem = tasks.indexOf(item)
+    // if (indexItem >= 0) {
+    //   tasks.splice(indexItem, 1)
+    //   res.status(200).json(tasks)
+    // } else {
+    //   res.status(404).json({ status: 'ERROR', message: 'No se encontró la tarea a eliminar' })
+    // }
+    try {
+      const itemId = req.params.id
+      const response = await tableInit.deleteOne({ _id: new mongoose.Types.ObjectId(itemId) })
+      res.status(200).json(response)
+    } catch (err) {
+      res.status(500).json({ status: 'ERROR', message: 'No se eliminó el registro; ' + err.message })
     }
   } else {
     res.status(400).json({ status: 'ERROR', message: 'No se esta enviando el parametro necesario' })
   }
-});
+})
 
-module.exports = router;
+module.exports = router
